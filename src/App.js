@@ -6,7 +6,6 @@ import Footer from './components/Footer';
 
 // Import des composants existants
 import Hero from './components/Hero';
-import Banner from './components/Banner';        // Si tu veux le garder sur l'accueil
 import Events from './components/Events';
 import Highlights from './components/Highlights';
 import Missions from './components/Missions';     // Le composant Missions complet
