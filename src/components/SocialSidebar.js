@@ -1,5 +1,12 @@
 import React from 'react';
 
+const socialNetworks = [
+  { label: 'Facebook', href: 'https://www.facebook.com/AGEOS.Tunisie/' },
+  { label: 'LinkedIn', href: 'https://www.linkedin.com/company/ageos-tunisia' },
+  { label: 'Instagram', href: 'https://www.instagram.com/ageos.tunisie/' },
+  { label: 'YouTube', href: 'https://www.youtube.com/c/AGEOS-Tunisie' },
+];
+
 const SocialIcon = ({ network }) => {
   const commonProps = {
     'aria-hidden': true,
@@ -41,14 +48,9 @@ const SocialIcon = ({ network }) => {
   );
 };
 
-const SocialSidebar = () => (
-  <aside className="social-rail fixed right-4 top-1/2 z-40 hidden -translate-y-1/2 flex-col gap-3 2xl:flex" aria-label="Réseaux sociaux AGEOS">
-    {[
-      { label: 'Facebook', href: 'https://www.facebook.com/AGEOS.Tunisie/' },
-      { label: 'LinkedIn', href: 'https://www.linkedin.com/company/ageos-tunisia' },
-      { label: 'Instagram', href: 'https://www.instagram.com/ageos.tunisie/' },
-      { label: 'YouTube', href: 'https://www.youtube.com/c/AGEOS-Tunisie' },
-    ].map((social) => (
+export const SocialLinks = ({ className = '' }) => (
+  <div className={`social-links ${className}`} aria-label="Réseaux sociaux AGEOS">
+    {socialNetworks.map((social) => (
       <a
         key={social.label}
         href={social.href}
@@ -59,8 +61,15 @@ const SocialSidebar = () => (
       >
         <SocialIcon network={social.label} />
         <span className="social-rail__tooltip" aria-hidden="true">{social.label}</span>
+        <span className="social-rail__mobile-label">{social.label}</span>
       </a>
     ))}
+  </div>
+);
+
+const SocialSidebar = () => (
+  <aside className="social-rail fixed right-4 top-1/2 z-40 hidden -translate-y-1/2 flex-col gap-3 xl:flex">
+    <SocialLinks />
   </aside>
 );
 

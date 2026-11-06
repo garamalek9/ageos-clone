@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import ageosLogo from '../assets/events/ageos-header-logo.png';
+import { SocialLinks } from './SocialSidebar';
 
 const navigation = [
   { label: 'Accueil', to: '/' },
@@ -72,6 +73,7 @@ const Navbar = () => {
             >
               Rejoindre AGEOS
             </NavLink>
+            <SocialLinks className="social-links--mobile" />
           </div>
         </div>
       )}

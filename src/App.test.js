@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from '@testing-library/react';
+import { fireEvent, render, screen, within } from '@testing-library/react';
 import App from './App';
 
 jest.mock('react-router-dom', () => {
@@ -110,4 +110,29 @@ test('shows the AGEOS board and verified social channels', () => {
     'https://www.youtube.com/c/AGEOS-Tunisie'
   );
   expect(screen.getByRole('link', { name: 'AGEOS sur YouTube' }).querySelector('svg')).toBeInTheDocument();
+});
+
+test('shows social media buttons in the mobile navigation menu', () => {
+  window.history.pushState({}, '', '/');
+  render(<App />);
+
+  fireEvent.click(screen.getByRole('button', { name: 'Ouvrir le menu' }));
+  const mobileMenu = document.querySelector('#mobile-navigation');
+
+  expect(within(mobileMenu).getByRole('link', { name: 'AGEOS sur Facebook' })).toHaveAttribute(
+    'href',
+    'https://www.facebook.com/AGEOS.Tunisie/'
+  );
+  expect(within(mobileMenu).getByRole('link', { name: 'AGEOS sur Instagram' })).toHaveAttribute(
+    'href',
+    'https://www.instagram.com/ageos.tunisie/'
+  );
+  expect(within(mobileMenu).getByRole('link', { name: 'AGEOS sur LinkedIn' })).toHaveAttribute(
+    'href',
+    'https://www.linkedin.com/company/ageos-tunisia'
+  );
+  expect(within(mobileMenu).getByRole('link', { name: 'AGEOS sur YouTube' })).toHaveAttribute(
+    'href',
+    'https://www.youtube.com/c/AGEOS-Tunisie'
+  );
 });

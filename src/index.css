@@ -127,6 +127,23 @@ nav.fixed a[aria-current="page"]:not([aria-label]) {
   -webkit-backdrop-filter: blur(12px);
 }
 
+.social-links {
+  display: flex;
+  gap: 0.7rem;
+}
+
+.social-rail .social-links {
+  flex-direction: column;
+}
+
+.social-links--mobile {
+  justify-content: center;
+  gap: clamp(0.35rem, 3vw, 0.85rem);
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #e8edf2;
+}
+
 .social-rail__link {
   position: relative;
   width: 3rem;
@@ -167,6 +184,10 @@ nav.fixed a[aria-current="page"]:not([aria-label]) {
   height: 1.25rem;
 }
 
+.social-rail__mobile-label {
+  display: none;
+}
+
 .social-rail__tooltip {
   position: absolute;
   top: 50%;
@@ -190,6 +211,28 @@ nav.fixed a[aria-current="page"]:not([aria-label]) {
 .social-rail__link:focus-visible .social-rail__tooltip {
   opacity: 1;
   transform: translate(0, -50%);
+}
+
+@media (max-width: 1023px) {
+  .social-links--mobile .social-rail__link {
+    width: clamp(3.75rem, 19vw, 4.5rem);
+    height: 3.75rem;
+    flex-direction: column;
+    gap: 0.2rem;
+    border-radius: 0.9rem;
+  }
+
+  .social-links--mobile .social-rail__icon {
+    width: 1.1rem;
+    height: 1.1rem;
+  }
+
+  .social-links--mobile .social-rail__mobile-label {
+    display: block;
+    font-size: 0.62rem;
+    font-weight: 700;
+    line-height: 1;
+  }
 }
 
 .ageos-nav-cta {
