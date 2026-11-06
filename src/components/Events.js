@@ -1,82 +1,52 @@
 import React from 'react';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination, Autoplay } from 'swiper/modules';
 
-// Importe toutes tes images
-import climadaptHackathon from '../assets/events/climadapt-hackathon.jpg';
-import droneCupWinners from '../assets/events/drone-cup-winners.jpg';
-import droneDayPoster from '../assets/events/drone-day-poster.jpg';
-import geoEducationDay from '../assets/events/geo-education-day.jpg';
-import geomagPoster from '../assets/events/geomag-poster.jpg';
-import gisDayPoster from '../assets/events/gis-day-poster.jpg';
+const archives = [
+  {
+    title: 'OpenGeoAI Hackathon',
+    image: '/images/opengeoai-hack-2023.png',
+    alt: 'Affiche de l’OpenGeoAI Hackathon organisé par AGEOS',
+    description: 'Un rendez-vous autour de l’intelligence artificielle et de l’information géospatiale.',
+  },
+  {
+    title: 'Drone Day',
+    image: '/images/drone-day-2023.png',
+    alt: 'Affiche du Drone Day organisé par AGEOS',
+    description: 'Découverte des usages des drones et des données aériennes.',
+  },
+  {
+    title: 'GeoEducation',
+    image: '/images/geoeducation-2023.png',
+    alt: 'Affiche d’une activité GeoEducation d’AGEOS',
+    description: 'Des activités de sensibilisation à la géomatique et à ses applications.',
+  },
+];
 
-const Events = () => {
-  const events = [
-    { src: climadaptHackathon, title: 'Climadapt Hackathon', subtitle: 'Innovation for Climate Adaptation - 04-05 Oct 2025' },
-    { src: droneCupWinners, title: 'Tunisia Drone Cup', subtitle: 'Remise des Prix - Just Drone It !' },
-    { src: gisDayPoster, title: 'GIS Day', subtitle: 'Geospatial & Innovation for SDGs' },
-    { src: geomagPoster, title: 'Tunisia GeoAI Hack', subtitle: 'Hackathon & Conference - April 2022' },
-    { src: geoEducationDay, title: 'Geo-Education Day', subtitle: 'Sup\'Com - Formation & Sensibilisation' },
-    { src: droneDayPoster, title: 'Tunisia Drone Day 2022', subtitle: '11 June 2022 - Tunis Science City' },
-  ];
-
-  return (
-    <section className="py-20 bg-black">
-      <div className="container mx-auto px-4 text-center mb-12">
-        <h2 className="text-5xl md:text-7xl font-extrabold text-white drop-shadow-2xl">
-          Nos Événements
+const Events = () => (
+  <section className="bg-white px-4 py-16 md:py-20" aria-labelledby="events-title">
+    <div className="mx-auto max-w-6xl">
+      <div className="max-w-2xl">
+        <p className="text-sm font-bold uppercase tracking-[0.2em] text-teal-700">En images</p>
+        <h2 id="events-title" className="mt-3 text-3xl font-extrabold text-slate-900 md:text-4xl">
+          Les archives AGEOS
         </h2>
+        <p className="mt-4 leading-7 text-slate-600">
+          Retour sur quelques initiatives qui illustrent la diversité des activités de l’association.
+        </p>
       </div>
 
-      <Swiper
-        modules={[Navigation, Pagination, Autoplay]}
-        spaceBetween={40}
-        slidesPerView={1}
-        centeredSlides={true}
-        breakpoints={{
-          640: { slidesPerView: 1 },
-          768: { slidesPerView: 2 },
-          1024: { slidesPerView: 3 },
-        }}
-        navigation={true}
-        pagination={{ clickable: true }}
-        autoplay={{
-          delay: 1500,                    // ← PLUS RAPIDE : toutes les 1,5 secondes !
-          disableOnInteraction: false,
-          pauseOnMouseEnter: true,        // Pause au survol
-        }}
-        loop={true}
-        speed={500}  // Transition ultra-rapide
-        className="max-w-7xl mx-auto pb-16"
-      >
-        {events.map((event, index) => (
-          <SwiperSlide key={index}>
-            <div className="group relative">
-              {/* Cadre visible autour de chaque image */}
-              <div className="rounded-3xl overflow-hidden border-4 border-white/30 shadow-2xl group-hover:border-white/70 group-hover:shadow-yellow-500/30 transition-all duration-500">
-                <img
-                  src={event.src}
-                  alt={event.title}
-                  className="w-full h-96 md:h-[600px] object-cover transition-transform duration-10000 group-hover:scale-110"
-                />
-                {/* Overlay texte */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent flex items-end p-8">
-                  <div>
-                    <h3 className="text-3xl md:text-5xl font-bold text-white mb-3 drop-shadow-2xl">
-                      {event.title}
-                    </h3>
-                    <p className="text-xl md:text-2xl text-yellow-300 font-medium drop-shadow-lg">
-                      {event.subtitle}
-                    </p>
-                  </div>
-                </div>
-              </div>
+      <div className="mt-9 grid gap-6 md:grid-cols-3">
+        {archives.map(({ title, image, alt, description }) => (
+          <article key={title} className="overflow-hidden rounded-2xl border border-slate-200 bg-white">
+            <img src={image} alt={alt} loading="lazy" className="aspect-[4/3] w-full object-cover" />
+            <div className="p-5">
+              <h3 className="text-lg font-bold text-slate-900">{title}</h3>
+              <p className="mt-2 text-sm leading-6 text-slate-600">{description}</p>
             </div>
-          </SwiperSlide>
+          </article>
         ))}
-      </Swiper>
-    </section>
-  );
-};
+      </div>
+    </div>
+  </section>
+);
 
 export default Events;

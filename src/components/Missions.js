@@ -1,115 +1,97 @@
 import React from 'react';
-import ageosHeaderLogo from '../assets/events/ageos-header-logo.png'; // ← Import correct !
+import { Link } from 'react-router-dom';
 
-const Missions = () => {
-  const missions = [
-    "Sensibiliser à l'apport de l'information spatiale en tant que vecteur de développement.",
-    "Renforcer les liens entre les acteurs académiques, publics et privés du secteur géospatial.",
-    "Appuyer les acteurs publics du domaine géospatial.",
-    "Mener une veille sur le marché géospatial en Tunisie.",
-    "Participer à l’évolution de la législation nationale régissant le secteur géospatial.",
-    "Participer à la promotion du secteur géospatial à l’échelle de l’Afrique."
-  ];
+const missions = [
+  'Sensibiliser à l’apport de l’information spatiale en tant que vecteur de développement.',
+  'Renforcer les liens entre les acteurs académiques, publics et privés du secteur géospatial.',
+  'Appuyer les acteurs publics du domaine géospatial.',
+  'Mener une veille sur le marché géospatial en Tunisie.',
+  'Participer à l’évolution de la législation nationale régissant le secteur géospatial.',
+  'Participer à la promotion du secteur géospatial à l’échelle de l’Afrique.',
+];
 
-  const comite = [
-    { initial: "N", nom: "Nesrine Chehata", poste: "Présidente" },
-    { initial: "O", nom: "Omar Gaafar", poste: "Vice-président" },
-    { initial: "H", nom: "Hedia Chakroun", poste: "Secrétaire générale" },
-    { initial: "M", nom: "Mohamed Rajhi", poste: "Trésorier" },
-    { initial: "M", nom: "Mohamed Chouchane", poste: "Responsable communication et relations publiques" }
-  ];
+const committee = [
+  { name: 'Nesrine Chehata', role: 'Présidente' },
+  { name: 'Ismail Laribi', role: 'Vice-président' },
+  { name: 'Jihene Ghiloufi', role: 'Trésorière' },
+  { name: 'Saida Hammami', role: 'Secrétaire générale' },
+  { name: 'Souha Zriba', role: 'Secrétaire générale adjointe' },
+];
 
-  return (
-    <section className="py-20 bg-white min-h-screen">
-      <div className="container mx-auto px-4 max-w-7xl">
+const Missions = () => (
+  <section className="min-h-screen bg-slate-50 px-4 py-16 md:py-20">
+    <div className="mx-auto max-w-7xl">
+      <header className="mx-auto mb-14 max-w-4xl text-center">
+        <p className="text-sm font-bold uppercase tracking-[0.2em] text-teal-700">À propos d’AGEOS</p>
+        <h1 className="mt-3 text-4xl font-extrabold tracking-tight text-slate-900 md:text-5xl">
+          Le géospatial, moteur de développement
+        </h1>
+        <p className="mt-6 text-lg leading-8 text-slate-600">
+          AGEOS — African Association for Geospatial Development — rassemble des universitaires,
+          des étudiants et des professionnels des secteurs privé et public actifs dans le domaine
+          du géospatial. Son objectif commun : promouvoir l’information géographique et les
+          technologies géospatiales.
+        </p>
+        <p className="mt-4 font-semibold text-slate-700">Association publiée au JORT le 3 novembre 2016</p>
+      </header>
 
-        {/* Header avec le grand logo central */}
-        <div className="text-center mb-20">
-          <div className="inline-block bg-white rounded-3xl shadow-2xl p-8 md:p-12 border border-gray-100">
-            <img 
-              src={ageosHeaderLogo} 
-              alt="AGEOS - African Association for Geospatial Development" 
-              className="w-full max-w-2xl md:max-w-4xl drop-shadow-xl"
-            />
-          </div>
-
-          <h1 className="text-5xl md:text-6xl font-extrabold text-blue-900 mt-12 mb-6">
-            Missions & Vision
-          </h1>
-
-          <div className="text-center text-gray-700">
-            <p className="text-xl font-semibold">AGEOS : African Association for Geospatial Development</p>
-            <p className="text-lg text-green-700 font-bold mt-2">Publication au JORT le 03 Novembre 2016</p>
-          </div>
+      <div className="rounded-3xl bg-slate-900 px-7 py-10 text-white md:px-12 md:py-14">
+        <div className="mb-9 max-w-2xl">
+          <p className="text-sm font-bold uppercase tracking-[0.2em] text-teal-300">Notre engagement</p>
+          <h2 className="mt-3 text-3xl font-extrabold md:text-4xl">Nos missions</h2>
         </div>
+        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          {missions.map((mission, index) => (
+            <article key={mission} className="lift-card reveal-on-scroll rounded-2xl border border-white/10 bg-white/5 p-6">
+              <span className="text-sm font-bold text-amber-300">0{index + 1}</span>
+              <p className="mt-3 leading-7 text-slate-100">{mission}</p>
+            </article>
+          ))}
+        </div>
+      </div>
 
-        {/* Description générale */}
-        <div className="bg-gray-50 rounded-3xl shadow-inner p-10 mb-20 max-w-5xl mx-auto">
-          <p className="text-xl text-gray-700 text-center leading-relaxed">
-            AGEOS regroupe des universitaires, étudiants et professionnels des secteurs publics et privés actifs dans le domaine du géospatial.
+      <section className="mt-16" aria-labelledby="committee-heading">
+        <div className="mx-auto mb-9 max-w-3xl text-center">
+          <p className="text-sm font-bold uppercase tracking-[0.2em] text-teal-700">L’association</p>
+          <h2 id="committee-heading" className="mt-3 text-3xl font-extrabold text-slate-900 md:text-4xl">
+            Bureau AGEOS · 2026–2028
+          </h2>
+          <p className="mt-4 leading-7 text-slate-600">
+            L’équipe élue pour poursuivre les actions d’AGEOS en Tunisie et en Afrique.
           </p>
         </div>
-
-        {/* Nos Missions */}
-        <h2 className="text-5xl md:text-6xl font-extrabold text-blue-900 text-center mb-16">
-          Nos Missions
-        </h2>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 mb-24">
-          {missions.map((mission, index) => (
-            <div 
-              key={index}
-              className="bg-white rounded-3xl shadow-xl p-8 relative overflow-hidden hover:shadow-2xl transition-shadow duration-300"
-            >
-              {/* Numéro bleu arrondi débordant */}
-              <div className="absolute -top-6 -left-6 w-24 h-24 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center text-white text-5xl font-bold shadow-lg">
-                {index + 1}
-              </div>
-
-              <div className="pt-12">
-                <p className="text-lg text-gray-800 font-medium leading-relaxed">
-                  {mission}
-                </p>
-              </div>
-            </div>
+        <img
+          src="/images/ageos-board-2026-2028.png"
+          alt="Affiche officielle présentant le bureau AGEOS 2026–2028"
+          loading="lazy"
+          className="mx-auto mb-8 max-h-[34rem] w-full rounded-2xl bg-slate-900 object-contain"
+        />
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {committee.map((member) => (
+            <article key={member.name} className="lift-card reveal-on-scroll rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+              <h3 className="text-xl font-bold text-slate-900">{member.name}</h3>
+              <p className="mt-1 font-semibold text-teal-800">{member.role}</p>
+            </article>
           ))}
         </div>
+      </section>
 
-        {/* Comité Directeur */}
-        <h2 className="text-5xl md:text-6xl font-extrabold text-blue-900 text-center mb-16">
-          Comité Directeur
-        </h2>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 max-w-6xl mx-auto">
-          {comite.map((membre, index) => (
-            <div 
-              key={index}
-              className="relative bg-gradient-to-br from-blue-700 to-blue-900 rounded-3xl p-10 text-center text-white shadow-2xl overflow-hidden group"
-            >
-              {/* Effet cercle jaune flou derrière */}
-              <div className="absolute -top-8 left-1/2 transform -translate-x-1/2 w-32 h-32 bg-yellow-300/20 rounded-full blur-3xl group-hover:bg-yellow-300/30 transition"></div>
-
-              {/* Cercle avec initiale */}
-              <div className="relative z-10 w-32 h-32 mx-auto mb-8 bg-blue-400/50 rounded-full border-8 border-white/30 flex items-center justify-center text-6xl font-bold shadow-xl">
-                {membre.initial}
-              </div>
-
-              <h3 className="text-2xl md:text-3xl font-bold mb-3">{membre.nom}</h3>
-              <p className="text-yellow-300 text-xl font-semibold">{membre.poste}</p>
-            </div>
-          ))}
+      <div className="mt-14 flex flex-col items-start justify-between gap-6 rounded-3xl border border-slate-200 bg-white p-8 shadow-sm md:flex-row md:items-center md:p-10">
+        <div>
+          <h2 className="text-2xl font-bold text-slate-900">Une communauté ouverte et engagée</h2>
+          <p className="mt-2 max-w-2xl leading-7 text-slate-600">
+            Échangez avec AGEOS, découvrez ses activités et participez au développement de l’écosystème géospatial.
+          </p>
         </div>
-
-        {/* Bouton final */}
-        <div className="text-center mt-24">
-          <button className="bg-yellow-400 text-black font-bold text-xl py-5 px-14 rounded-full hover:bg-yellow-300 transform hover:scale-105 transition shadow-2xl">
-            Devenir Membre
-          </button>
-        </div>
-
+        <Link
+          to="/membres"
+          className="shrink-0 rounded-full bg-amber-400 px-6 py-3 font-bold text-slate-950 transition hover:bg-amber-300"
+        >
+          Nous rejoindre
+        </Link>
       </div>
-    </section>
-  );
-};
+    </div>
+  </section>
+);
 
 export default Missions;

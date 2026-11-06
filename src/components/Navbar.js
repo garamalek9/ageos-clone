@@ -1,38 +1,80 @@
-// Mise à jour du Navbar pour utiliser react-router-dom
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link, NavLink } from 'react-router-dom';
+import ageosLogo from '../assets/events/ageos-header-logo.png';
+
+const navigation = [
+  { label: 'Accueil', to: '/' },
+  { label: 'À propos', to: '/missions' },
+  { label: 'Actualités', to: '/actualites' },
+  { label: 'Sensibilisation', to: '/sensibilisation' },
+  { label: 'Formations', to: '/formations' },
+  { label: 'Projets', to: '/projets' },
+];
 
 const Navbar = () => {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const linkClass = ({ isActive }) =>
+    `transition-colors hover:text-teal-700 ${isActive ? 'text-teal-800' : 'text-slate-700'}`;
+
   return (
-    <nav className="bg-white shadow-md fixed top-0 left-0 right-0 z-50">
-      <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-        {/* Logo + Texte à gauche */}
-        <div className="flex items-center">
-          <Link to="/">
-            <img 
-              src="https://geoportail.commune-zriba.com.tn/assets/img/ageos_logo.jpg" 
-              alt="AGEOS Logo" 
-              className="h-12 md:h-16 mr-4"
-            />
-          </Link>
+    <nav className="fixed inset-x-0 top-0 z-50 border-b border-slate-200/80 bg-white/95 shadow-sm backdrop-blur">
+      <div className="mx-auto flex h-[76px] max-w-7xl items-center justify-between px-4 md:px-6">
+        <Link to="/" aria-label="AGEOS — accueil" onClick={() => setMenuOpen(false)}>
+          <img src={ageosLogo} alt="AGEOS" className="ageos-logo" />
+        </Link>
+
+        <div className="hidden items-center gap-6 lg:flex">
+          {navigation.map((item) => (
+            <NavLink key={item.to} to={item.to} end={item.to === '/'} className={linkClass}>
+              {item.label}
+            </NavLink>
+          ))}
+          <NavLink
+            to="/membres"
+            className="ageos-nav-cta rounded-full px-5 py-2.5 font-semibold text-white transition"
+          >
+            Rejoindre AGEOS
+          </NavLink>
         </div>
 
-        {/* Menu navigation à droite */}
-        <ul className="hidden md:flex space-x-8 text-blue-900 font-semibold text-lg">
-          <li><Link to="/" className="hover:text-blue-600 transition">Accueil</Link></li>
-          <li><Link to="/actualites" className="hover:text-blue-600 transition">Actualités</Link></li>
-          <li><Link to="/missions" className="hover:text-blue-600 transition">Missions</Link></li>
-          <li><Link to="/sensibilisation" className="hover:text-blue-600 transition">Sensibilisation</Link></li>
-          <li><Link to="/formations" className="hover:text-blue-600 transition">Formations</Link></li>
-          <li><Link to="/projets" className="hover:text-blue-600 transition">Projets</Link></li>
-          <li><Link to="/membres" className="hover:text-blue-600 transition">Membres ▼</Link></li>
-        </ul>
-
-        {/* Menu mobile (hamburger) - tu peux l'améliorer avec un état pour ouvrir/fermer */}
-        <div className="md:hidden">
-          <button className="text-blue-900 text-3xl">☰</button>
-        </div>
+        <button
+          type="button"
+          className="inline-flex h-11 w-11 items-center justify-center rounded-lg text-2xl text-slate-800 hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-teal-700 lg:hidden"
+          aria-label={menuOpen ? 'Fermer le menu' : 'Ouvrir le menu'}
+          aria-expanded={menuOpen}
+          aria-controls="mobile-navigation"
+          onClick={() => setMenuOpen((open) => !open)}
+        >
+          {menuOpen ? '×' : '☰'}
+        </button>
       </div>
+
+      {menuOpen && (
+        <div id="mobile-navigation" className="mobile-navigation border-t border-slate-200 bg-white px-5 py-4 shadow-lg lg:hidden">
+          <div className="mx-auto flex max-w-7xl flex-col gap-1">
+            {navigation.map((item) => (
+              <NavLink
+                key={item.to}
+                to={item.to}
+                end={item.to === '/'}
+                className={({ isActive }) =>
+                  `rounded-lg px-3 py-3 font-medium ${isActive ? 'bg-teal-50 text-teal-800' : 'text-slate-700 hover:bg-slate-50'}`
+                }
+                onClick={() => setMenuOpen(false)}
+              >
+                {item.label}
+              </NavLink>
+            ))}
+            <NavLink
+              to="/membres"
+              className="ageos-nav-cta mt-2 rounded-full px-5 py-3 text-center font-semibold text-white"
+              onClick={() => setMenuOpen(false)}
+            >
+              Rejoindre AGEOS
+            </NavLink>
+          </div>
+        </div>
+      )}
     </nav>
   );
 };
